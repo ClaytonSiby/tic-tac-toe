@@ -1,41 +1,52 @@
 #!/usr/bin/env ruby
 
-# step1: get player names
+posible_wins = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+player_one_choices = []
+player_two_choices = []
+game_on = true
+
 puts "Player 1 name: "
 player_one = gets.chomp
 
 puts "Player 2 name: "
 player_two = gets.chomp
 
-# step2: Starting the game
 puts "#{player_one} pick a number from 1 to 9: "
 player_one_choice = gets.chomp.to_i
 
-=begin
-check if player_one_choice is an integer between 1 & 9 
-then
-replace player_one_choice with X on the board & display updated board
-otherwise 
-display an error message.
-=end
+if move_is_valid?(player_one_choice)
+    player_one_choices << player_one_choice
+    puts board 
+else
+    error_message
+end
+
+while game_on
+    draw_message if board_is_full?
+    if posible_wins.any?(player_one_choices)
+        player_wins(player_one)
+        game_on = false
+    else 
+        swich_player
+    end
+end
 
 puts "#{player_two} pick a number from 1 to 9: "
-player_two_choice = gets.chomp
+player_two_choice = gets.chomp.to_i
 
-=begin
-check if player_two_choice is an integer between 1 & 9 
-then
-replace player_two_choice with X on the board & display updated board
-otherwise 
-display an error message.
-=end
+if move_is_valid?(player_two_choice)
+    player_two_choices << player_two_choice
+    puts board 
+else
+    error_message
+end
 
-=begin
-game continues until one player checks three X's or O's in a row.
-the player that checks all three in a row wins otherwise it's a draw.
-=end
-
-=begin
-ask players if they wish to repeat or finish game play, if repeat, then reset the board & start from top.
-if finish, type game over!!
-=end
+while game_on
+    draw_message if board_is_full?
+    if posible_wins.any?(player_two_choices)
+        player_wins(player_two)
+        game_on = false
+    else 
+        swich_player
+    end
+end
