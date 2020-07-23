@@ -36,6 +36,21 @@ class Board
         @@positions.none?(String)
     end
 
+    def draw_message
+      "It's a draw!!"
+    end
+
+    def player_wins(current_player)
+        "#{@current_player} won!! :)"
+    end
+
+    def switch_player
+       if @current_player
+          @current_player == player2
+       else
+         @current_player
+       end
+    end
 end
 
 board = Board.new("Clayton", "Visvaldas")
