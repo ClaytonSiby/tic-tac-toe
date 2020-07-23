@@ -19,9 +19,24 @@ class Board
     end
 
     def valid_move?(move)
-      @positions.any?(move)
+      @@positions.any?(move)
     end
+
+    def position_empty?(move)
+         @@positions[move - 1].is_a?(String) ? false : true
+    end
+
+    def asign_mark(move, mark)
+        "position taken or invalid move" if valid_move?(move) || position_empty?(move)
+
+        @@positions[move - 1] = mark
+    end
+
+    def board_full?
+        @@positions.none?(String)
+    end
+
 end
 
 board = Board.new("Clayton", "Visvaldas")
-puts board.draw_board
+puts board.position_empty?(1)
