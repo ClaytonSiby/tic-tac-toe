@@ -1,11 +1,8 @@
 class Board
-    attr_reader :player1 , :player2, :current_player
-    @@positions = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9]
-   
-    def initialize(player1, player2)
-        @player1 = player1
-        @player2 = player2
-        @current_player = player1
+    @@positions = (1..9).to_a
+
+    def initialize
+        @@positions
     end
 
     def draw_board
@@ -18,40 +15,26 @@ class Board
         "
     end
 
-    def valid_move?(move)
+    def self.error_message
+        'invalid move please enter a number between 1 and 9'
+    end
+
+    def self.valid_move?(move)
       @@positions.any?(move)
     end
 
-    def position_empty?(move)
-         @@positions[move - 1].is_a?(String) ? false : true
+    def self.position_empty?(move)
+         @@positions[move - 1].is_a?(String) ? "Position #{move} has been taken please make another choice" : true
     end
 
-    def asign_mark(move, mark)
-        "position taken or invalid move" if valid_move?(move) || position_empty?(move)
+    def self.asign_mark(move, mark)
+       return error_message unless valid_move?(move) && position_empty?(move)
 
         @@positions[move - 1] = mark
     end
 
-    def board_full?
-        @@positions.none?(String)
+    def self.board_full?
+        @@positions.none?(Integer)
     end
 
-    def draw_message
-      "It's a draw!!"
-    end
-
-    def player_wins(current_player)
-        "#{@current_player} won!! :)"
-    end
-
-    def switch_player
-       if @current_player
-          @current_player == player2
-       else
-         @current_player
-       end
-    end
 end
-
-board = Board.new("Clayton", "Visvaldas")
-puts board.position_empty?(1)
