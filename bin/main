@@ -82,7 +82,7 @@ loop do
     break if game_on > 8
 
     puts Board.update_board
-    go_player(first_player)
+    go_player(second_player)
     puts Board.update_board
     break if announce_winner?(second_player)
 
