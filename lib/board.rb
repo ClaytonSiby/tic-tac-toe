@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../lib/player'
-
 # board class definition
 class Board
+  attr_reader :positions
   @@positions = (1..9).to_a
   def initialize
     @@positions

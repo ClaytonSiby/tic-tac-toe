@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative './lib/board.rb'
-
 # Player class definition
 class Player
   attr_reader :name, :mark, :choices
