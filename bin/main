@@ -2,19 +2,24 @@
 require_relative '../lib/board'
 require_relative '../lib/player'
 
+# determine if an array includes given elements.
+class Array
+  def contain_all?(arr)
+    arr.all? { |elem| include?(elem) }
+  end
+end
 
 # PlayGame module holding the game possible wins.
 module PlayGame
-
-  # check if array includes give element.
-  class CheckArr
-    def self.does_contain?(arr)
-      arr.all? { |el| include?(el) }
-    end
-  end
+  POSSIBLE_WINS = [
+    [1, 2, 3], [4, 5, 6],
+    [7, 8, 9], [1, 5, 9],
+    [2, 5, 8], [3, 5, 7],
+    [1, 4, 7], [3, 6, 9]
+  ].freeze
 
   def self.won?(player)
-    POSSIBLE_WINS.any? { |element| element.CheckArr.does_contain?(player.choices) }
+    POSSIBLE_WINS.any? { |elem| player.choices.contain_all?(elem) }
   end
 end
 
@@ -32,33 +37,17 @@ def go_player(player)
   while choice_result != choice
     puts choice_result
     choice = gets.chomp.strip.to_i
+    choice_result = player.my_move(choice)
   end
 end
 
-# def announce_winner?(player)
-#   if PlayGame.won?(player)
-#     puts "Congatulations #{player.name} you've won the game!!"
-#     return true
-#   end
-#   false
-# end
-POSSIBLE_WINS = [
-  [1, 2, 3], [4, 5, 6],
-  [7, 8, 9], [1, 4, 7],
-  [2, 5, 8], [3, 6, 9],
-  [3, 5, 7], [1, 5, 9]
-].freeze
-
 def announce_winner?(player)
-  if POSSIBLE_WINS.any?(player.choices)
-    puts "#{player.name} You won!"
+  if PlayGame.won?(player)
+    puts "Congatulations #{player.name} you've won the game!!"
     return true
   end
   false
 end
-# check if player choices maches any of the possible wins
-
-
 
 puts 'First player please state your name >> '
 first_player = Player.new(name_players, 'X')
@@ -66,34 +55,26 @@ first_player = Player.new(name_players, 'X')
 puts 'Second player please enter your name >> '
 second_player = Player.new(name_players, 'O')
 
-puts "Game's gonna be between #{first_player.name} (X) & #{second_player.name} (O). Good luck!!!"
+puts "Game's gonna be between #{first_player.name} (X) & #{second_player.name} (O). Good luck!!! \n\n"
 
 loop do
-  replay = false
-  game_on = 0
-  sleep(2)
-  while game_on < 9
-    puts Board.update_board
+  game_over = false
+  count = 0
+  while count < 9
     go_player(first_player)
     puts Board.update_board
     break if announce_winner?(first_player)
 
-    game_on += 1
-    break if game_on > 8
+    count += 1
+    break if count >= 9
 
-    puts Board.update_board
     go_player(second_player)
     puts Board.update_board
     break if announce_winner?(second_player)
 
-    game_on += 1
+    count += 1
   end
-  puts 'Game over & it is a draw' if game_on > 8
-  puts 'Do you wish to replay? (Y/N) >> '
-  answer = gets.chomp.upcase
-  replay = true if answer == 'Y'
-  Board.reset_board
-  first_player.reset_choices
-  second_player.reset_choices
-  break unless replay
+  puts Board.game_draw if count >= 9
+  break unless game_over
 end
+

@@ -1,20 +1,17 @@
-# frozen_string_literal: true
-
 # board class definition
 class Board
-  attr_reader :positions
-  @@positions = (1..9).to_a
+  @positions = (1..9).to_a
   def initialize
-    @@positions
+    @positions
   end
 
   def self.draw_board
     "
-    #{@@positions[0]} | #{@@positions[1]} | #{@@positions[2]}
-    =======
-    #{@@positions[3]} | #{@@positions[4]} | #{@@positions[5]}
-    =======
-    #{@@positions[6]} | #{@@positions[7]} | #{@@positions[8]}
+    #{@positions[0]} | #{@positions[1]} | #{@positions[2]}
+    =========
+    #{@positions[3]} | #{@positions[4]} | #{@positions[5]}
+    =========
+    #{@positions[6]} | #{@positions[7]} | #{@positions[8]}
     "
   end
 
@@ -28,22 +25,20 @@ class Board
   end
 
   def self.position_empty?(move)
-    @@positions[move - 1].is_a?(Integer)
+    @positions[move - 1].is_a?(Integer)
   end
 
-  def self.draw
-    'Game over & it is a draw!!' if @@positions.none?(Integer)
+  def self.game_draw
+    'Game over & it is a draw!!'
   end
 
   def self.make_move(move, mark)
-    return 'Invalid move, enter a numbe in range 1..9' unless valid_move?(move)
-
-    return "Position #{move} has been taken, please select another. >> " unless position_empty?(move)
-
-    @@positions[move - 1] = mark
-  end
-
-  def self.reset_board
-    @@positions.size.times { |el| @@positions[el] = el + 1 }
+    if valid_move?(move) != true
+      return 'Invalid move, enter a numbe in range 1..9'
+    elsif  position_empty?(move) != true
+      return "Position #{move} has been taken, please select another. >> "
+    else
+      @positions[move - 1] = mark
+    end
   end
 end
