@@ -34,9 +34,9 @@ class Board
 
   def self.make_move(move, mark)
     if valid_move?(move) != true
-      return 'Invalid move, enter a numbe in range 1..9'
-    elsif  position_empty?(move) != true
-      return "Position #{move} has been taken, please select another. >> "
+      'Invalid move, enter a numbe in range 1..9'
+    elsif position_empty?(move) != true
+      "Position #{move} has been taken, please select another. >> "
     else
       @positions[move - 1] = mark
     end
