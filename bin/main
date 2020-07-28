@@ -1,52 +1,58 @@
 #!/usr/bin/env ruby
+require_relative '../lib/board'
+require_relative '../lib/player'
 
-posible_wins = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-player_one_choices = []
-player_two_choices = []
-game_on = true
+def name_players
+  name = gets.chomp
+  name = gets.chomp while name.empty?
 
-puts 'Player 1 name: '
-player_one = gets.chomp
-
-puts 'Player 2 name: '
-player_two = gets.chomp
-
-puts "#{player_one} pick a number from 1 to 9: "
-player_one_choice = gets.chomp.to_i
-
-if move_is_valid?(player_one_choice)
-  player_one_choices << player_one_choice
-  puts board
-else
-  error_message
+  name
 end
 
-while game_on
-  draw_message if board_is_full?
-  if posible_wins.any?(player_one_choices)
-    player_wins(player_one)
-    game_on = false
-  else
-    swich_player
+def go_player(player)
+  puts "#{player.name} select (in range 1..9) a number to make a move >> "
+  choice = gets.chomp.strip.to_i
+  choice_result = player.my_move(choice)
+  while choice_result != choice
+    puts choice_result
+    choice = gets.chomp.strip.to_i
+    choice_result = player.my_move(choice)
   end
 end
 
-puts "#{player_two} pick a number from 1 to 9: "
-player_two_choice = gets.chomp.to_i
-
-if move_is_valid?(player_two_choice)
-  player_two_choices << player_two_choice
-  puts board
-else
-  error_message
+def announce_winner?(player)
+  if PlayGame.won?(player)
+    puts "Congatulations #{player.name} you've won the game!!"
+    return true
+  end
+  false
 end
 
-while game_on
-  draw_message if board_is_full?
-  if posible_wins.any?(player_two_choices)
-    player_wins(player_two)
-    game_on = false
-  else
-    swich_player
+puts 'First player please state your name >> '
+first_player = Player.new(name_players, 'X')
+
+puts 'Second player please enter your name >> '
+second_player = Player.new(name_players, 'O')
+
+puts "Game's gonna be between #{first_player.name} (X) & #{second_player.name} (O). Good luck!!! \n\n"
+
+loop do
+  game_over = false
+  count = 0
+  while count < 9
+    go_player(first_player)
+    puts Board.update_board
+    break if announce_winner?(first_player)
+
+    count += 1
+    break if count >= 9
+
+    go_player(second_player)
+    puts Board.update_board
+    break if announce_winner?(second_player)
+
+    count += 1
   end
+  puts Board.game_draw if count >= 9
+  break unless game_over
 end
