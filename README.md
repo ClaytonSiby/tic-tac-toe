@@ -25,7 +25,7 @@
 
 ## The following example game is won by the first player, X:
 
-![screenshot](https://en.wikipedia.org/wiki/Tic-tac-toe#/media/File:Tic-tac-toe-game-1.svg)
+![screenshot](https://en.wikipedia.org/wiki/Tic-tac-toe#/media/File:Tic-tac-toe-game-1.svg )
 
 ## It's a draw
 - When non of the player's marks three of their marks in a horizontal, vertical, or diagonal row, instead just fills full board.
