@@ -25,9 +25,7 @@
 
 ## The following example game is won by the first player, X:
 <p> 1,2,3       X,2,O     X,2,O      X,2,O</p>
-<br>
 <p> 4,5,6 -->   4,5,6 --> X,5,6  --> X,5,6</p>
-<br>
 <p> 7,8,9       7,8,9     7,O,9      X,O,O</p>
 
 ## It's a draw
