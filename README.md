@@ -24,9 +24,9 @@
 - If any player enters number which is marked on the board, they will get the error message which say that that place is take on the board.
 
 ## The following example game is won by the first player, X:
-1,2,3       X,2,O     X,2,O      X,2,O
-4,5,6 -->   4,5,6 --> X,5,6  --> X,5,6
-7,8,9       7,8,9     7,O,9      X,O,O
+- 1,2,3       X,2,O     X,2,O      X,2,O
+- 4,5,6 -->   4,5,6 --> X,5,6  --> X,5,6
+- 7,8,9       7,8,9     7,O,9      X,O,O
 
 ## It's a draw
 - When non of the player's marks three of their marks in a horizontal, vertical, or diagonal row, instead just fills full board.
