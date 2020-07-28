@@ -31,11 +31,12 @@
 ## It's a draw
 - When non of the player's marks three of their marks in a horizontal, vertical, or diagonal row, instead just fills full board.
 
-## To run in on your computer
+## To run it on your computer
 
 - Get a local copy of the repository run the following commands on your terminal:
 - $ git clone https://github.com/ClaytonSiby/tic-tac-toe.git
 - $ cd tic-tac-toe
+- $ Write in your terminal - "main" or "ruby main" (without qoutes) if not working.
 
 
 ## Built With
