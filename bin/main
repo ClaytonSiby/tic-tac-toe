@@ -56,5 +56,3 @@ loop do
   puts Board.game_draw if count >= 9
   break unless game_over
 end
-
-
