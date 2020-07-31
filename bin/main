@@ -28,6 +28,12 @@ def announce_winner?(player)
   false
 end
 
+def play(player)
+  go_player(player)
+  puts Board.update_board
+  exit if announce_winner?(player)
+end
+
 puts 'First player please state your name >> '
 first_player = Player.new(name_players, 'X')
 
@@ -40,17 +46,12 @@ loop do
   game_over = false
   count = 0
   while count < 9
-    go_player(first_player)
-    puts Board.update_board
-    break if announce_winner?(first_player)
+    play(first_player)
 
     count += 1
     break if count >= 9
 
-    go_player(second_player)
-    puts Board.update_board
-    break if announce_winner?(second_player)
-
+    play(second_player)
     count += 1
   end
   puts Board.game_draw if count >= 9
