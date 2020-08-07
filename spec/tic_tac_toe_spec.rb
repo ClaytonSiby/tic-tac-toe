@@ -30,15 +30,34 @@ describe Array do
 end
 
 describe Board do
-  let(:move_invalid) {32}
-  let(:move_valid) {4}
-  let(:mark) {'X'}
+  describe "#self.make_move" do
+    let(:move_invalid) {32}
+    let(:move_valid) {4}
+    let(:mark) {'X'}
   
-  it "should prompt that move is invalid" do
-    expect(Board.make_move( move_invalid, mark)).to eq('Invalid move, enter a numbe in range 1..9')
-  end
+    it "should prompt that move is invalid" do
+      expect(Board.make_move( move_invalid, mark)).to eq('Invalid move, enter a numbe in range 1..9')
+    end
 
-  it "should prompt X since move is in valid range(1..9)" do
-    expect(Board.make_move( move_valid, mark)).to eq('X')
+    it "should prompt X since move is in valid range(1..9)" do
+      expect(Board.make_move( move_valid, mark)).to eq('X')
+    end
+  end
+  
+  describe "self.draw_board" do
+  let(:positions) {Array.new}
+    it "should display the board with user selection in 4 as 'X' " do
+      positions = (1..9).to_a
+      expect(Board.draw_board).to eq(
+         "
+    #{positions[0]} | #{positions[1]} | #{positions[2]}
+    =========
+    X | #{positions[4]} | #{positions[5]}
+    =========
+    #{positions[6]} | #{positions[7]} | #{positions[8]}
+    "
+      )
+    end
   end
 end
+
