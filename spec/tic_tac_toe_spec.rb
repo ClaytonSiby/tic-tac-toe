@@ -22,7 +22,7 @@ describe Array do
   let(:test_arr) {Array.new}
   describe "#contain_all?" do
     it 'It compares object & argument arrays & return false if they are not same' do
-      object = [1,3,3]
+      object = [1,4,3]
       test_arr = [1,2,3]
       expect(object.contain_all?(test_arr)).to eq(false) 
     end
