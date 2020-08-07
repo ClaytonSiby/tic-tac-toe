@@ -3,9 +3,6 @@ require 'player'
 
 describe Player do
   subject(:instance) { Player.new("somename", "X") }
-  # # let(:name) { "Name"}
-  # subject(:mark) {Player.new("X")}
-  # # let(:choises) {(1..9)}
 
   describe "#initialize" do
     it 'It should expect name instance values class as string' do
@@ -17,9 +14,18 @@ describe Player do
     end
 
   end
+  
 end
 
+describe Array do
+  let(:object) {Array.new}
+  let(:test_arr) {Array.new}
+  describe "#contain_all?" do
+    it 'It compares object & argument arrays & return false if they are not same' do
+      object = [1,3,3]
+      test_arr = [1,2,3]
+      expect(object.contain_all?(test_arr)).to eq(false) 
+    end
+  end
 
-# it "Should return the last name input which is belong to player2" do
-#   expect(object.welcome.class).to eq(String)
-# end
+end
