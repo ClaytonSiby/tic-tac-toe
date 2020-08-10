@@ -41,7 +41,7 @@
 ## To run Rspec tests on your computer
 
 - Get a local copy of the repository run the following commands on your terminal:
-- $ git clone git@github.com:visva-dev/tic-tac-toe.git
+- $ git clone https://github.com/ClaytonSiby/tic-tac-toe.git
 - $ cd tic-tac-toe
 - $ Write in your terminal - "rspec" (without qoutes).
 
