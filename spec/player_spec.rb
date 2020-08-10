@@ -1,4 +1,4 @@
-require_relative '../lib/player.rb' 
+require_relative '../lib/player.rb'
 
 describe Player do
   subject(:instance) { Player.new('somename', 'X') }

@@ -1,4 +1,4 @@
-require_relative '../lib/board.rb' 
+require_relative '../lib/board.rb'
 
 describe Board do
   describe '#self.make_move' do
@@ -52,8 +52,8 @@ describe Array do
 end
 
 describe PlayGame do
-  let(:possible_wins) {[[1, 2, 3], [4, 5, 6]]}
-  let(:player_choices) {[1, 2, 3]}
+  let(:possible_wins) { [[1, 2, 3], [4, 5, 6]] }
+  let(:player_choices) { [1, 2, 3] }
 
   describe 'self.won?' do
     it 'Expect true if it finds player_choises array in POSSIBLE_WINS array' do
